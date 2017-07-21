@@ -8,7 +8,7 @@ from io import open
 import jieba
 import numpy as np
 import config
-jieba.load_userdict('dicts/user_dict.txt')
+jieba.load_userdict("dicts/user_dict.txt")
 
 
 def make_dir(path):
@@ -131,8 +131,8 @@ def process_data():
     enc_vocab_size = build_vocab('train.enc')
     dec_vocab_size = build_vocab('train.dec')
     vocab_size = {'encoder': enc_vocab_size, 'decoder': dec_vocab_size}
-    with open(os.path.join(config.DATA_PATH, 'vocab_size.json'), 'w') as f:
-        f.write(unicode(json.dumps(vocab_size, ensure_ascii=False)))
+    with open(os.path.join(config.DATA_PATH, 'vocab_size.json'), 'w', encoding='utf-8') as f:
+        f.write(json.dumps(vocab_size, ensure_ascii=False))
     token2id('train', 'enc')
     token2id('train', 'dec')
     token2id('test', 'enc')
