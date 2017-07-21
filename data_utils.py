@@ -28,7 +28,7 @@ def basic_tokenizer(line, normalize_digits=True):
     words = []
     _digit_re = re.compile(r"\d")
     for token in jieba.cut(line.strip()):
-        if token == " ":
+        if token in [" ", ""]:
             continue
         if normalize_digits:
             token = re.sub(_digit_re, "#", token)
