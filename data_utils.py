@@ -38,10 +38,6 @@ def basic_tokenizer(line, normalize_digits=True):
         if normalize_digits:
             token = re.sub(_digit_re, "#", token)
         words.append(token)
-    # FIXME: the list returned contains "".
-    if "" in words:
-        import ipdb
-        ipdb.set_trace()
     return words
 
 
@@ -58,9 +54,6 @@ def build_vocab(filename):
     with open(in_path, encoding="utf-8") as f:
         for line in f.readlines():
             for token in basic_tokenizer(line):
-                if token == "":
-                    import ipdb
-                    ipdb.set_trace()
                 if token not in vocab:
                     vocab[token] = 0
                 vocab[token] += 1
@@ -78,9 +71,6 @@ def build_vocab(filename):
             # should be dropped.
             if vocab[word] < config.THRESHOLD:
                 return index
-            if not word:
-                import ipdb
-                ipdb.set_trace()
             f.write(word + "\n")
             index += 1
     return index
