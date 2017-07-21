@@ -28,8 +28,10 @@ def basic_tokenizer(line, normalize_digits=True):
     words = []
     _digit_re = re.compile(r"\d")
     for token in jieba.cut(line.strip()):
+        if token == " ":
+            continue
         if normalize_digits:
-            token = re.sub(_digit_re, '#', token)
+            token = re.sub(_digit_re, "#", token)
         words.append(token)
     return words
 
@@ -37,34 +39,34 @@ def basic_tokenizer(line, normalize_digits=True):
 def build_vocab(filename):
     """
     Build vocabulary.
-    :param filename: 'train.enc' or 'train.dec'
+    :param filename: "train.enc" or "train.dec"
     """
     in_path = os.path.join(config.DATA_PATH, filename)
-    out_path = os.path.join(config.DATA_PATH, 'vocab.{}'.format(filename[-3:]))
+    out_path = os.path.join(config.DATA_PATH, "vocab.{}".format(filename[-3:]))
     # Word frequency statistics
     # `vocab`: dict of <token, frequency> pairs.
     vocab = {}
-    with open(in_path, encoding='utf-8') as f:
+    with open(in_path, encoding="utf-8") as f:
         for line in f.readlines():
             for token in basic_tokenizer(line):
                 if token not in vocab:
                     vocab[token] = 0
                 vocab[token] += 1
     # sort by frequency
-    # sorted_vocab <type 'list'>
+    # sorted_vocab <type "list">
     sorted_vocab = sorted(vocab, key=vocab.get, reverse=True)
-    with open(out_path, 'w', encoding='utf-8') as f:
-        f.write('<pad>' + '\n')
-        f.write('<unk>' + '\n')
-        f.write('<s>' + '\n')
-        f.write('<\s>' + '\n')
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write("<pad>" + "\n")
+        f.write("<unk>" + "\n")
+        f.write("<s>" + "\n")
+        f.write("<\s>" + "\n")
         index = 4
         for word in sorted_vocab:
             # Words with frequency less than `config.THRESHOLD`
             # should be dropped.
             if vocab[word] < config.THRESHOLD:
                 return index
-            f.write(word + '\n')
+            f.write(word + "\n")
             index += 1
     return index
 
@@ -76,7 +78,7 @@ def load_vocab(vocab_path):
         `words` is a list of vocab strings.
         `word2id` is a dict of <word_str, word_id> pairs.
     """
-    with open(vocab_path, encoding='utf-8') as f:
+    with open(vocab_path, encoding="utf-8") as f:
         words = f.read().splitlines()
     word2id = {words[i]: i for i in range(len(words))}
     return words, word2id
@@ -91,7 +93,7 @@ def sentence2id(vocab, line):
     :return: list of word indices
     """
     # Get word index or get the index of <unk>.
-    return [vocab.get(token, vocab['<unk>']) for token in basic_tokenizer(line)]
+    return [vocab.get(token, vocab["<unk>"]) for token in basic_tokenizer(line)]
 
 
 def token2id(data, mode):
@@ -99,52 +101,52 @@ def token2id(data, mode):
     Convert all the tokens in the data into their corresponding
         index in the vocabulary.
     Args:
-        :param data: 'train' or 'test'
-        :param mode: 'enc' or 'dec'
+        :param data: "train" or "test"
+        :param mode: "enc" or "dec"
     """
-    vocab_path = 'vocab.' + mode
-    in_path = data + '.' + mode
-    out_path = data + '_ids.' + mode
+    vocab_path = "vocab." + mode
+    in_path = data + "." + mode
+    out_path = data + "_ids." + mode
     # Get the dict of word2id: `vocab`.
     _, vocab = load_vocab(os.path.join(config.DATA_PATH, vocab_path))
     in_file = open(os.path.join(config.DATA_PATH, in_path),
-                   encoding='utf-8')
-    out_file = open(os.path.join(config.DATA_PATH, out_path), 'w')
+                   encoding="utf-8")
+    out_file = open(os.path.join(config.DATA_PATH, out_path), "w")
     lines = in_file.read().splitlines()
-    # `lines` is a list of sentence strings, e.g., ['hello!', 'how are you?']
+    # `lines` is a list of sentence strings, e.g., ["hello!", "how are you?"]
     in_file.close()
     for line in lines:
-        if mode == 'dec':  # we only care about '<s>' and </s> in encoder
-            ids = [vocab['<s>']]
+        if mode == "dec":  # we only care about "<s>" and </s> in encoder
+            ids = [vocab["<s>"]]
         else:
             ids = []
         ids.extend(sentence2id(vocab, line))
-        # ids.extend([vocab.get(token, vocab['<unk>']) for token in basic_tokenizer(line)])
-        if mode == 'dec':
-            ids.append(vocab['<\s>'])
-        out_file.write(' '.join(str(id_) for id_ in ids) + '\n')
+        # ids.extend([vocab.get(token, vocab["<unk>"]) for token in basic_tokenizer(line)])
+        if mode == "dec":
+            ids.append(vocab["<\s>"])
+        out_file.write(" ".join(str(id_) for id_ in ids) + "\n")
     out_file.close()
 
 
 def process_data():
-    print('Preparing data...')
-    enc_vocab_size = build_vocab('train.enc')
-    dec_vocab_size = build_vocab('train.dec')
-    vocab_size = {'encoder': enc_vocab_size, 'decoder': dec_vocab_size}
-    with open(os.path.join(config.DATA_PATH, 'vocab_size.json'), 'w', encoding='utf-8') as f:
+    print("Preparing data...")
+    enc_vocab_size = build_vocab("train.enc")
+    dec_vocab_size = build_vocab("train.dec")
+    vocab_size = {"encoder": enc_vocab_size, "decoder": dec_vocab_size}
+    with open(os.path.join(config.DATA_PATH, "vocab_size.json"), "w", encoding="utf-8") as f:
         f.write(json.dumps(vocab_size, ensure_ascii=False))
-    token2id('train', 'enc')
-    token2id('train', 'dec')
-    token2id('test', 'enc')
-    token2id('test', 'dec')
+    token2id("train", "enc")
+    token2id("train", "dec")
+    token2id("test", "enc")
+    token2id("test", "dec")
 
 
 def load_data(enc_filename, dec_filename):
     """
     Load data from *_ids.* files and group the data into buckets.
     Args:
-        :param enc_filename: 'train_ids.enc', etc.
-        :param dec_filename: 'train_ids.dec', etc.
+        :param enc_filename: "train_ids.enc", etc.
+        :param dec_filename: "train_ids.dec", etc.
     Return:
         `data_buckets` is a list of lists. Each list is a bucket,
         and each bucket contains many <context, response> pairs.
@@ -182,7 +184,7 @@ def _reshape_batch(inputs, size, batch_size):
     Create batch-major inputs. Batch inputs are just re-indexed inputs.
     :param inputs: encoder_inputs or decoder_inputs, which is a list of batches.
     :param size: encoder_size or decoder_size.
-    :param batch_size: batch size <type 'int'>.
+    :param batch_size: batch size <type "int">.
     """
     batch_inputs = []
     for length_id in range(size):
@@ -197,7 +199,7 @@ def get_batch(data_bucket, bucket_id, batch_size=1):
     :param data_bucket: a certain bucket from `data_buckets`,
         which is a list of <context, response> pairs.
     :param bucket_id: a bucket index which is randomly chosen.
-    :param batch_size: batch size <type 'int'>
+    :param batch_size: batch size <type "int">.
     Return one batch to feed into the model.
     """
     # Only pad to the max length of the bucket
@@ -209,7 +211,7 @@ def get_batch(data_bucket, bucket_id, batch_size=1):
         # Pad both encoder and decoder, reverse the encoder
         encoder_inputs.append(list(reversed(_pad_input(encoder_input, encoder_size))))
         decoder_inputs.append(_pad_input(decoder_input, decoder_size))
-    # encoder_inputs <type 'list'>: input data of encoder.
+    # encoder_inputs <type "list">: input data of encoder.
     # encoder_inputs[0]: first batch of encoder inputs.
     # encoder_inputs[0][0]: first context of the first batch.
     # encoder_inputs[0][0][0]: first word index of the context.
@@ -233,5 +235,5 @@ def get_batch(data_bucket, bucket_id, batch_size=1):
     return batch_encoder_inputs, batch_decoder_inputs, batch_masks
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     process_data()

@@ -201,8 +201,7 @@ class ChatBotModel(object):
         self.cell = tf.contrib.rnn.MultiRNNCell([single_cell] * config.NUM_LAYERS)
 
     def _create_loss(self):
-        print('Creating loss... \nIt might take a couple of '
-              'minutes depending on how many buckets you have.')
+        print('Creating loss...')
         start = time.time()
 
         def _seq2seq_f(encoder_inputs, decoder_inputs, do_decode):
@@ -241,8 +240,7 @@ class ChatBotModel(object):
         print('Time:', time.time() - start)
 
     def _create_optimizer(self):
-        print('Create optimizer... \nIt might take a couple '
-              'of minutes depending on how many buckets you have.')
+        print('Create optimizer... ')
         with tf.variable_scope('training'):
             self.global_step = tf.Variable(
                 0, dtype=tf.int32, trainable=False, name='global_step')
