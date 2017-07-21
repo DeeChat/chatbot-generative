@@ -8,6 +8,11 @@ from io import open
 import jieba
 import numpy as np
 import config
+import logging
+logging.basicConfig(
+    format='%(asctime)s : %(levelname)s : %(message)s',
+    level=logging.INFO
+)
 jieba.load_userdict("dicts/user_dict.txt")
 
 
@@ -28,11 +33,15 @@ def basic_tokenizer(line, normalize_digits=True):
     words = []
     _digit_re = re.compile(r"\d")
     for token in jieba.cut(line.strip()):
-        if token in [" ", ""]:
+        if token in [" ", "", u"\u035b"]:
             continue
         if normalize_digits:
             token = re.sub(_digit_re, "#", token)
         words.append(token)
+    # FIXME: the list returned contains "".
+    if "" in words:
+        import ipdb
+        ipdb.set_trace()
     return words
 
 
@@ -49,6 +58,9 @@ def build_vocab(filename):
     with open(in_path, encoding="utf-8") as f:
         for line in f.readlines():
             for token in basic_tokenizer(line):
+                if token == "":
+                    import ipdb
+                    ipdb.set_trace()
                 if token not in vocab:
                     vocab[token] = 0
                 vocab[token] += 1
@@ -66,6 +78,9 @@ def build_vocab(filename):
             # should be dropped.
             if vocab[word] < config.THRESHOLD:
                 return index
+            if not word:
+                import ipdb
+                ipdb.set_trace()
             f.write(word + "\n")
             index += 1
     return index
@@ -113,6 +128,7 @@ def token2id(data, mode):
                    encoding="utf-8")
     out_file = open(os.path.join(config.DATA_PATH, out_path), "w")
     lines = in_file.read().splitlines()
+    # FIXME: decoder size error (extra sequence got when running larger corpus).
     # `lines` is a list of sentence strings, e.g., ["hello!", "how are you?"]
     in_file.close()
     for line in lines:
@@ -129,15 +145,22 @@ def token2id(data, mode):
 
 
 def process_data():
-    print("Preparing data...")
+    logging.info("Processing raw data...")
+    logging.info("Building vocabulary for encoder inputs...")
     enc_vocab_size = build_vocab("train.enc")
+    logging.info("Building vocabulary for decoder inputs...")
     dec_vocab_size = build_vocab("train.dec")
     vocab_size = {"encoder": enc_vocab_size, "decoder": dec_vocab_size}
-    with open(os.path.join(config.DATA_PATH, "vocab_size.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(config.DATA_PATH, "vocab_size.json"),
+              "w", encoding="utf-8") as f:
         f.write(json.dumps(vocab_size, ensure_ascii=False))
+    logging.info("Tokenizing encoder inputs of training data...")
     token2id("train", "enc")
+    logging.info("Tokenizing decoder inputs of training data...")
     token2id("train", "dec")
+    logging.info("Tokenizing encoder inputs of test data...")
     token2id("test", "enc")
+    logging.info("Tokenizing decoder inputs of test data...")
     token2id("test", "dec")
 
 

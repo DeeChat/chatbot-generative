@@ -261,6 +261,7 @@ def chat():
             line = _get_user_input()
             if hasattr(line, "decode"):
                 # If using Python 2
+                # FIXME: UnicodeError when deleting Chinese in terminal.
                 line = line.decode("utf-8")
             if len(line) > 0 and line[-1] == "\n":
                 line = line[:-1]
