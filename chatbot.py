@@ -63,7 +63,7 @@ def run_step(sess, model, encoder_inputs, decoder_inputs,
             forward_only is set to True when you just want to evaluate on the test set,
             or when you want to the bot to be in chat mode.
     Returns:
-        gradient norm, loss, outputs
+        gradient norm, loss, outputs.
     """
     encoder_size, decoder_size = config.BUCKETS[bucket_id]
     _assert_lengths(encoder_size, decoder_size,
@@ -98,7 +98,8 @@ def run_step(sess, model, encoder_inputs, decoder_inputs,
 
 
 def _get_buckets():
-    """ Load the dataset into buckets based on their lengths.
+    """
+    Load the dataset into buckets based on their lengths.
     train_buckets_scale is the interval that"ll help us
     choose a random bucket later on.
     """
@@ -130,10 +131,10 @@ def check_restore_parameters(sess, saver):
     ckpt = tf.train.get_checkpoint_state(os.path.dirname(
         config.CPT_PATH + "/checkpoint"))
     if ckpt and ckpt.model_checkpoint_path:
-        print("Loading parameters for the Chatbot...")
+        logging.info("Loading parameters for the Chatbot...")
         saver.restore(sess, ckpt.model_checkpoint_path)
     else:
-        print("Initializing fresh parameters for the Chatbot...")
+        logging.info("Initializing fresh parameters for the Chatbot...")
 
 
 def _eval_test_set(sess, model, test_buckets):
@@ -165,7 +166,8 @@ def train():
     #     test_buckets[0][0]: first pair of the first bucket
     #     test_buckets[0][0][0], test_buckets[0][0][1]: Context and response
     #     test_buckets[0][0][0][0]: word index of the first words
-    # train_buckets_scale: [1.0]
+    # train_buckets_scale: list of increasing numbers from 0 to 1 that
+    #     we"ll use to select a bucket. len(train_buckets_scale) = len(BUCKETS)
     test_buckets, data_buckets, train_buckets_scale = _get_buckets()
 
     # in train mode, we need to create the backward path, so forward_only is False
