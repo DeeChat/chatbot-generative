@@ -1,15 +1,16 @@
 from __future__ import print_function
+
 import json
 import os
 import time
+
 import tensorflow as tf
-import config
-from tensorflow.python.ops import variable_scope
-from tensorflow.python.util import nest
 from tensorflow.contrib.rnn.python.ops import core_rnn_cell
 from tensorflow.python.ops import array_ops
-from tensorflow.python.ops import rnn
 from tensorflow.python.ops import control_flow_ops
+from tensorflow.python.ops import rnn
+
+import config
 
 
 def embedding_attention_seq2seq(encoder_inputs,
@@ -70,8 +71,8 @@ def embedding_attention_seq2seq(encoder_inputs,
             state: The state of each decoder cell at the final time-step.
                 It is a 2D Tensor of shape [batch_size x cell.state_size].
     """
-    with variable_scope.variable_scope(scope or "embedding_attention_seq2seq",
-                                       dtype=dtype) as scope:
+    with tf.variable_scope(scope or "embedding_attention_seq2seq",
+                           dtype=dtype) as scope:
         dtype = scope.dtype
         # Encoder.
         encoder_cell = enc_cell
@@ -110,8 +111,8 @@ def embedding_attention_seq2seq(encoder_inputs,
         # If feed_previous is a Tensor, we construct 2 graphs and use cond.
         def decoder(feed_previous_bool):
             reuse = None if feed_previous_bool else True
-            with variable_scope.variable_scope(
-                    variable_scope.get_variable_scope(), reuse=reuse):
+            with tf.variable_scope(tf.get_variable_scope(),
+                                   reuse=reuse):
                 outputs, dec_state = tf.contrib.legacy_seq2seq.embedding_attention_decoder(
                     decoder_inputs,
                     encoder_state,
@@ -126,8 +127,8 @@ def embedding_attention_seq2seq(encoder_inputs,
                     update_embedding_for_previous=False,
                     initial_state_attention=initial_state_attention)
                 dec_state_list = [dec_state]
-                if nest.is_sequence(dec_state):
-                    dec_state_list = nest.flatten(dec_state)
+                if tf.nest.is_sequence(dec_state):
+                    dec_state_list = tf.nest.flatten(dec_state)
                 return outputs + dec_state_list
 
         outputs_and_state = control_flow_ops.cond(feed_previous,
@@ -136,8 +137,8 @@ def embedding_attention_seq2seq(encoder_inputs,
         outputs_len = len(decoder_inputs)  # Outputs length same as decoder inputs.
         state_list = outputs_and_state[outputs_len:]
         state = state_list[0]
-        if nest.is_sequence(encoder_state):
-            state = nest.pack_sequence_as(
+        if tf.nest.is_sequence(encoder_state):
+            state = tf.nest.pack_sequence_as(
                 structure=encoder_state, flat_sequence=state_list)
         return outputs_and_state[:outputs_len], state
 
@@ -147,15 +148,15 @@ class ChatBotModel(object):
         """
         :param forward_only: if set, we do not construct the backward pass in the model.
         """
-        print('Initializing new model...')
+        print("Initializing new model...")
         self.fw_only = forward_only
         self.batch_size = batch_size
-        with open(os.path.join(config.DATA_PATH, 'vocab_size.json'), 'r') as f:
+        with open(os.path.join(config.DATA_PATH, "vocab_size.json"), "r") as f:
             self.vocab_size = json.load(f)
 
     def _create_placeholders(self):
         # Feeds for inputs. It's a list of placeholders
-        print('Creating placeholders...')
+        print("Creating placeholders...")
         self.encoder_inputs = [tf.placeholder(
             tf.int32, shape=[None], name='encoder{}'.format(i)
         ) for i in range(config.BUCKETS[-1][0])]
@@ -177,7 +178,7 @@ class ChatBotModel(object):
         # Sampled softmax only makes sense if we sample less than vocabulary size.
         if 0 < config.NUM_SAMPLES < self.vocab_size['decoder']:
             w_t = tf.get_variable('proj_w', [self.vocab_size['decoder'], config.HIDDEN_SIZE])
-            # `config.HIDDEN_SIZE`: embedding size
+            # `config.HIDDEN_SIZE` is the same as embedding size
             w = tf.transpose(w_t)
             b = tf.get_variable('proj_b', [self.vocab_size['decoder']])
             self.output_projection = (w, b)
@@ -251,16 +252,16 @@ class ChatBotModel(object):
                 self.gradient_norms = []
                 self.train_ops = []
                 start = time.time()
-                for bucket in range(len(config.BUCKETS)):
+                for bucket_id in range(len(config.BUCKETS)):
                     clipped_grads, norm = tf.clip_by_global_norm(
-                        tf.gradients(self.losses[bucket], trainable_vars),
+                        tf.gradients(self.losses[bucket_id], trainable_vars),
                         config.MAX_GRAD_NORM)
                     self.gradient_norms.append(norm)
                     self.train_ops.append(self.optimizer.apply_gradients(
                         zip(clipped_grads, trainable_vars),
                         global_step=self.global_step))
-                    print('Creating opt for bucket {} took {} seconds'.format(
-                        bucket, time.time() - start))
+                    print('Creating opt for bucket {:d} took {:.2f} seconds'.format(
+                        bucket_id, time.time() - start))
                     start = time.time()
 
     def build_graph(self):

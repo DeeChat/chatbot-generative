@@ -209,41 +209,46 @@ def _reshape_batch(inputs, size, batch_size):
 
 def get_batch(data_bucket, bucket_id, batch_size=1):
     """
-    :param data_bucket: a certain bucket from `data_buckets`,
-        which is a list of <context, response> pairs.
-    :param bucket_id: a bucket index which is randomly chosen.
-    :param batch_size: batch size <type "int">.
-    Return one batch to feed into the model.
+    Get one batch to feed into the model.
+    Args:
+        data_bucket: a certain bucket from `data_buckets`,
+            which is a list of <context, response> pairs.
+        bucket_id: a bucket index which is randomly chosen.
+        batch_size: batch size <type "int">.
     """
     # Only pad to the max length of the bucket
     encoder_size, decoder_size = config.BUCKETS[bucket_id]
     encoder_inputs, decoder_inputs = [], []
 
     for _ in range(batch_size):
+        # Choose a <context, utterance> pair randomly from the current bucket.
         encoder_input, decoder_input = random.choice(data_bucket)
-        # Pad both encoder and decoder, reverse the encoder
+        # Pad both encoder and decoder, reverse the encoder.
         encoder_inputs.append(list(reversed(_pad_input(encoder_input, encoder_size))))
         decoder_inputs.append(_pad_input(decoder_input, decoder_size))
-    # encoder_inputs <type "list">: input data of encoder.
-    # encoder_inputs[0]: first batch of encoder inputs.
-    # encoder_inputs[0][0]: first context of the first batch.
-    # encoder_inputs[0][0][0]: first word index of the context.
+    # encoder_inputs <type "list">: a batch of input data of encoder.
+    # encoder_inputs[0]: first padded encoder input of this batch,
+    #     e.g.: [0, 0, 41, 147, 30, 5]
+    # encoder_inputs[0][0]: first word index of the first encoder.
     # Now we create batch-major vectors from the data selected above.
     batch_encoder_inputs = _reshape_batch(encoder_inputs, encoder_size, batch_size)
+    # batch_encoder_inputs: a list of array.
+    # batch_encoder_inputs[0]: a 1-d array with shape (batch_size,). It
+    #     is the last time step of all encoder inputs within this batch.
     batch_decoder_inputs = _reshape_batch(decoder_inputs, decoder_size, batch_size)
 
-    # create decoder_masks to be 0 for decoders that are padding.
+    # Create decoder_masks to be 0 for decoders that are padding.
     batch_masks = []
-    for length_id in range(decoder_size):
+    for dec_time_step in range(decoder_size):
         batch_mask = np.ones(batch_size, dtype=np.float32)
-        for batch_id in range(batch_size):
-            # we set mask to 0 if the corresponding target is a PAD symbol.
+        for idx in range(batch_size):
+            # we set mask to 0 if the corresponding target is <PAD> or <\s>.
             # the corresponding decoder is decoder_input shifted by 1 forward.
-            if length_id < decoder_size - 1:
-                target = decoder_inputs[batch_id][length_id + 1]
+            if dec_time_step < decoder_size - 1:
+                target = decoder_inputs[idx][dec_time_step + 1]
             # noinspection PyUnboundLocalVariable
-            if length_id == decoder_size - 1 or target == config.PAD_ID:
-                batch_mask[batch_id] = 0.0
+            if dec_time_step == decoder_size - 1 or target == config.PAD_ID:
+                batch_mask[idx] = 0.0
         batch_masks.append(batch_mask)
     return batch_encoder_inputs, batch_decoder_inputs, batch_masks
 

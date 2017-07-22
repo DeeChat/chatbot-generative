@@ -1,5 +1,6 @@
 idea/
-checkpoints/*
+checkpoints/
 *.pyc
 .ipynb_checkpoints/
-data/simisimi/output_convo.txt
+*/*/output_convo.txt
+*/output_convo.txt

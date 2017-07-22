@@ -39,13 +39,13 @@ def _assert_lengths(encoder_size, decoder_size, encoder_inputs,
     """
     if len(encoder_inputs) != encoder_size:
         raise ValueError("Encoder length must be equal to the one in bucket,"
-                         " %d != %d." % (len(encoder_inputs), encoder_size))
+                         " {:d} != {:d}.".format(len(encoder_inputs), encoder_size))
     if len(decoder_inputs) != decoder_size:
         raise ValueError("Decoder length must be equal to the one in bucket,"
-                         " %d != %d." % (len(decoder_inputs), decoder_size))
+                         " {:d} != {:d}.".format(len(decoder_inputs), decoder_size))
     if len(decoder_masks) != decoder_size:
         raise ValueError("Weights length must be equal to the one in bucket,"
-                         " %d != %d." % (len(decoder_masks), decoder_size))
+                         " {:d} != {:d}.".format(len(decoder_masks), decoder_size))
 
 
 def run_step(sess, model, encoder_inputs, decoder_inputs,
@@ -55,13 +55,15 @@ def run_step(sess, model, encoder_inputs, decoder_inputs,
     Args:
         sess: tensorflow.Session
         model: ChatBotModel
-        encoder_inputs:
-        decoder_inputs:
-        decoder_masks:
+        encoder_inputs: batch_encoder_inputs
+        decoder_inputs: batch_decoder_inputs
+        decoder_masks: weights
         bucket_id: index of the chosen bucket.
         forward_only: boolean value to decide whether a backward path should be created
             forward_only is set to True when you just want to evaluate on the test set,
             or when you want to the bot to be in chat mode.
+    Returns:
+        gradient norm, loss, outputs
     """
     encoder_size, decoder_size = config.BUCKETS[bucket_id]
     _assert_lengths(encoder_size, decoder_size,
@@ -80,17 +82,17 @@ def run_step(sess, model, encoder_inputs, decoder_inputs,
 
     # output feed: depends on whether we do a backward step or not.
     if not forward_only:
-        output_feed = [model.train_ops[bucket_id],  # update op that does SGD.
+        output_feed = [model.train_ops[bucket_id],       # update op that does SGD.
                        model.gradient_norms[bucket_id],  # gradient norm.
-                       model.losses[bucket_id]]  # loss for this batch.
+                       model.losses[bucket_id]]          # loss for this batch.
     else:
         output_feed = [model.losses[bucket_id]]  # loss for this batch.
-        for step in range(decoder_size):  # output logits.
+        for step in range(decoder_size):         # output logits.
             output_feed.append(model.outputs[bucket_id][step])
 
     outputs = sess.run(output_feed, input_feed)
     if not forward_only:
-        return outputs[1], outputs[2], None  # Gradient norm, loss, no outputs.
+        return outputs[1], outputs[2], None   # Gradient norm, loss, no outputs.
     else:
         return None, outputs[0], outputs[1:]  # No gradient norm, loss, outputs.
 
@@ -135,10 +137,12 @@ def check_restore_parameters(sess, saver):
 
 
 def _eval_test_set(sess, model, test_buckets):
-    """ Evaluate on the test set. """
+    """
+    Evaluate on the test set.
+    """
     for bucket_id in range(len(config.BUCKETS)):
         if len(test_buckets[bucket_id]) == 0:
-            print("  Test: empty bucket %d" % bucket_id)
+            print("  Test: empty bucket {:d}".format(bucket_id))
             continue
         start = time.time()
         encoder_inputs, decoder_inputs, decoder_masks = data_utils.get_batch(
@@ -147,12 +151,14 @@ def _eval_test_set(sess, model, test_buckets):
             batch_size=config.BATCH_SIZE)
         _, step_loss, _ = run_step(sess, model, encoder_inputs, decoder_inputs,
                                    decoder_masks, bucket_id, True)
-        logging.info("Test bucket {}: loss {}, time {}".format(
+        logging.info("Test bucket {:d}: loss {:.4f}, time {:.4f}".format(
             bucket_id, step_loss, time.time() - start))
 
 
 def train():
-    """ Train the bot."""
+    """
+    Train the bot.
+    """
     # test_buckets, data_buckets: <type "list">:
     #     [[[[Context], [Response]], ], ]]
     #     test_buckets[0]: first bucket
@@ -176,29 +182,33 @@ def train():
         iteration = model.global_step.eval()
         total_loss = 0
         logging.info("Training...")
-        while True:
-            skip_step = _get_skip_step(iteration)
-            bucket_id = _get_random_bucket(train_buckets_scale)
-            encoder_inputs, decoder_inputs, decoder_masks = data_utils.get_batch(
-                data_buckets[bucket_id], bucket_id,
-                batch_size=config.BATCH_SIZE)
-            start = time.time()
-            _, step_loss, _ = run_step(
-                sess, model, encoder_inputs, decoder_inputs,
-                decoder_masks, bucket_id, False)
-            total_loss += step_loss
-            iteration += 1
+        try:
+            while True:
+                skip_step = _get_skip_step(iteration)
+                bucket_id = _get_random_bucket(train_buckets_scale)
+                encoder_inputs, decoder_inputs, decoder_masks = data_utils.get_batch(
+                    data_buckets[bucket_id], bucket_id,
+                    batch_size=config.BATCH_SIZE)
+                start = time.time()
+                _, step_loss, _ = run_step(
+                    sess, model, encoder_inputs, decoder_inputs,
+                    decoder_masks, bucket_id, False)
+                total_loss += step_loss
+                iteration += 1
 
-            if iteration % skip_step == 0:
-                logging.info("Iter {}: loss {}, time {}".format(
-                    iteration, total_loss / skip_step, time.time() - start))
-                total_loss = 0
-                saver.save(sess, os.path.join(config.CPT_PATH, "chatbot"),
-                           global_step=model.global_step)
-                if iteration % (10 * skip_step) == 0:
-                    # Run evals on development set and print their loss
-                    _eval_test_set(sess, model, test_buckets)
-                sys.stdout.flush()
+                if iteration % skip_step == 0:
+                    logging.info("Training @ iter {:d}: loss {:.4f}, time {:.4f}".format(
+                        iteration, total_loss / skip_step, time.time() - start))
+                    total_loss = 0
+                    saver.save(sess, os.path.join(config.CPT_PATH, "chatbot"),
+                               global_step=model.global_step)
+                    if iteration % (10 * skip_step) == 0:
+                        logging.info("Testing...")
+                        # Run evals on development set and print their loss
+                        _eval_test_set(sess, model, test_buckets)
+                    sys.stdout.flush()
+        except KeyboardInterrupt:
+            logging.info("Training interrupted.")
 
 
 def _get_user_input():
@@ -219,9 +229,11 @@ def find_right_bucket(length):
 
 
 def construct_response(output_logits, inv_dec_vocab):
-    """ Construct a response to the user's encoder input.
-    @output_logits: the outputs from sequence to sequence wrapper.
-    output_logits is decoder_size np array, each of dim 1 x DEC_VOCAB
+    """Construct a response to the user's encoder input.
+    Args:
+        output_logits: the outputs from sequence to sequence wrapper.
+            output_logits is decoder_size np array, each of dim 1 x DEC_VOCAB
+        inv_dec_vocab: id2word, which is a list of vocabs.
 
     This is a greedy decoder - outputs are just argmaxes of output_logits.
     """
@@ -230,6 +242,7 @@ def construct_response(output_logits, inv_dec_vocab):
     outputs = [int(np.argmax(logit, axis=1)) for logit in output_logits]
     # If there is an EOS symbol in outputs, cut them at that point.
     if config.EOS_ID in outputs:
+        # FIXME: <\s> appears at the head of outputs when there exits small buckets.
         outputs = outputs[:outputs.index(config.EOS_ID)]
     # Print out sentence corresponding to outputs.
     return "".join([inv_dec_vocab[output] for output in outputs])
