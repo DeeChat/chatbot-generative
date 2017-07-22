@@ -75,16 +75,15 @@ def embedding_attention_seq2seq(encoder_inputs,
                            dtype=dtype) as scope:
         dtype = scope.dtype
         # Encoder.
-        encoder_cell = enc_cell
-        encoder_cell = core_rnn_cell.EmbeddingWrapper(
-            encoder_cell,
+        enc_cell = core_rnn_cell.EmbeddingWrapper(
+            enc_cell,
             embedding_classes=num_encoder_symbols,
             embedding_size=embedding_size)
         encoder_outputs, encoder_state = rnn.static_rnn(
-            encoder_cell, encoder_inputs, dtype=dtype)
+            enc_cell, encoder_inputs, dtype=dtype)
         # First calculate a concatenation of encoder outputs to put attention on.
         top_states = [
-            array_ops.reshape(e, [-1, 1, encoder_cell.output_size]) for e in encoder_outputs
+            array_ops.reshape(e, [-1, 1, enc_cell.output_size]) for e in encoder_outputs
         ]
         attention_states = array_ops.concat(top_states, 1)
 

@@ -17,7 +17,7 @@ logging.basicConfig(
     format='%(asctime)s : %(levelname)s : %(message)s',
     level=logging.INFO
 )
-jieba.load_userdict("dicts/user_dict.txt")
+# jieba.load_userdict("dicts/user_dict.txt")
 
 
 def make_dir(path):
