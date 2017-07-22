@@ -1,23 +1,26 @@
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
+
 import argparse
+import logging
 import os
 import random
 import sys
 import time
 from io import open
+
 import numpy as np
 import tensorflow as tf
+
 import config
 import data_utils
 from model import ChatBotModel
-import logging
+
 logging.basicConfig(
     format='%(asctime)s : %(levelname)s : %(message)s',
     level=logging.INFO
 )
-
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
@@ -82,17 +85,17 @@ def run_step(sess, model, encoder_inputs, decoder_inputs,
 
     # output feed: depends on whether we do a backward step or not.
     if not forward_only:
-        output_feed = [model.train_ops[bucket_id],       # update op that does SGD.
+        output_feed = [model.train_ops[bucket_id],  # update op that does SGD.
                        model.gradient_norms[bucket_id],  # gradient norm.
-                       model.losses[bucket_id]]          # loss for this batch.
+                       model.losses[bucket_id]]  # loss for this batch.
     else:
         output_feed = [model.losses[bucket_id]]  # loss for this batch.
-        for step in range(decoder_size):         # output logits.
+        for step in range(decoder_size):  # output logits.
             output_feed.append(model.outputs[bucket_id][step])
 
     outputs = sess.run(output_feed, input_feed)
     if not forward_only:
-        return outputs[1], outputs[2], None   # Gradient norm, loss, no outputs.
+        return outputs[1], outputs[2], None  # Gradient norm, loss, no outputs.
     else:
         return None, outputs[0], outputs[1:]  # No gradient norm, loss, outputs.
 
@@ -232,19 +235,21 @@ def find_right_bucket(length):
 
 def construct_response(output_logits, inv_dec_vocab):
     """Construct a response to the user's encoder input.
+    This is a greedy decoder - outputs are just argmaxes of output_logits.
     Args:
         output_logits: the outputs from sequence to sequence wrapper.
             output_logits is decoder_size np array, each of dim 1 x DEC_VOCAB
         inv_dec_vocab: id2word, which is a list of vocabs.
-
-    This is a greedy decoder - outputs are just argmaxes of output_logits.
+    Return:
+        Response of the input context.
     """
     # print(output_logits[0])
-    # noinspection PyTypeChecker
-    outputs = [int(np.argmax(logit, axis=1)) for logit in output_logits]
+    # output_logits: a list of arrays. len(output_logits) is decoder length
+    # output_logits[0]: numpy.ndarray with shape (1, DEC_VOCAB)
+    outputs = [int(np.argmax(logit, axis=1)[0]) for logit in output_logits]
     # If there is an EOS symbol in outputs, cut them at that point.
     if config.EOS_ID in outputs:
-        # FIXME: <\s> appears at the head of outputs when there exits small buckets.
+        # FIXME: <\s> appears at the head of outputs.
         outputs = outputs[:outputs.index(config.EOS_ID)]
     # Print out sentence corresponding to outputs.
     return "".join([inv_dec_vocab[output] for output in outputs])

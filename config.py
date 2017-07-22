@@ -27,8 +27,8 @@ These buckets size seem to work the best
 
 # BUCKETS = [(8, 10), (12, 14), (16, 19)]
 
-BUCKETS = [(16, 19)]
-# BUCKETS = [(10, 13), (13, 16), (16, 20)]
+# BUCKETS = [(16, 19)]
+BUCKETS = [(10, 13), (13, 16), (16, 20)]
 # BUCKETS = [(6, 8), (10, 13), (14, 18), (18, 23), (22, 27), (26, 31), (30, 35)]
 
 NUM_LAYERS = 3

@@ -215,6 +215,7 @@ class ChatBotModel(object):
                 feed_previous=do_decode)
 
         if self.fw_only:
+            # While testing.
             self.outputs, self.losses = tf.contrib.legacy_seq2seq.model_with_buckets(
                 self.encoder_inputs,
                 self.decoder_inputs,
@@ -230,6 +231,7 @@ class ChatBotModel(object):
                         output, self.output_projection[0]
                     ) + self.output_projection[1] for output in self.outputs[bucket]]
         else:
+            # While training.
             self.outputs, self.losses = tf.contrib.legacy_seq2seq.model_with_buckets(
                 self.encoder_inputs,
                 self.decoder_inputs,
@@ -260,7 +262,7 @@ class ChatBotModel(object):
                     self.train_ops.append(self.optimizer.apply_gradients(
                         zip(clipped_grads, trainable_vars),
                         global_step=self.global_step))
-                    print('Creating opt for bucket {:d} took {:.2f} seconds'.format(
+                    print('Creating opt for bucket {:d} took {:.2f} seconds.'.format(
                         bucket_id, time.time() - start))
                     start = time.time()
 

@@ -1,14 +1,18 @@
 from __future__ import print_function
 from __future__ import unicode_literals
+
+import json
+import logging
 import os
 import random
 import re
-import json
 from io import open
+
 import jieba
 import numpy as np
+
 import config
-import logging
+
 logging.basicConfig(
     format='%(asctime)s : %(levelname)s : %(message)s',
     level=logging.INFO
@@ -106,8 +110,8 @@ def token2id(data, mode):
     Convert all the tokens in the data into their corresponding
         index in the vocabulary.
     Args:
-        :param data: "train" or "test"
-        :param mode: "enc" or "dec"
+        data: "train" or "test"
+        mode: "enc" or "dec"
     """
     vocab_path = "vocab." + mode
     in_path = data + "." + mode
@@ -118,16 +122,14 @@ def token2id(data, mode):
                    encoding="utf-8")
     out_file = open(os.path.join(config.DATA_PATH, out_path), "w")
     lines = in_file.read().splitlines()
-    # FIXME: decoder size error (extra sequence got when running larger corpus).
     # `lines` is a list of sentence strings, e.g., ["hello!", "how are you?"]
     in_file.close()
     for line in lines:
-        if mode == "dec":  # we only care about "<s>" and </s> in encoder
+        if mode == "dec":  # we only care about <s> and </s> in decoder
             ids = [vocab["<s>"]]
         else:
             ids = []
         ids.extend(sentence2id(vocab, line))
-        # ids.extend([vocab.get(token, vocab["<unk>"]) for token in basic_tokenizer(line)])
         if mode == "dec":
             ids.append(vocab["<\s>"])
         out_file.write(" ".join(str(id_) for id_ in ids) + "\n")
@@ -239,8 +241,10 @@ def get_batch(data_bucket, bucket_id, batch_size=1):
 
     # Create decoder_masks to be 0 for decoders that are padding.
     batch_masks = []
+    # For each time step while decoding.
     for dec_time_step in range(decoder_size):
         batch_mask = np.ones(batch_size, dtype=np.float32)
+        # For each example in this batch.
         for idx in range(batch_size):
             # we set mask to 0 if the corresponding target is <PAD> or <\s>.
             # the corresponding decoder is decoder_input shifted by 1 forward.
