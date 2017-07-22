@@ -247,6 +247,7 @@ def construct_response(output_logits, inv_dec_vocab):
     # output_logits: a list of arrays. len(output_logits) is decoder length
     # output_logits[0]: numpy.ndarray with shape (1, DEC_VOCAB)
     outputs = [int(np.argmax(logit, axis=1)[0]) for logit in output_logits]
+    print(outputs)
     # If there is an EOS symbol in outputs, cut them at that point.
     if config.EOS_ID in outputs:
         # FIXME: <\s> appears at the head of outputs.

@@ -198,8 +198,10 @@ class ChatBotModel(object):
 
         self.softmax_loss_function = sampled_loss
 
-        single_cell = tf.contrib.rnn.GRUCell(config.HIDDEN_SIZE)
-        self.cell = tf.contrib.rnn.MultiRNNCell([single_cell] * config.NUM_LAYERS)
+        enc_cell = tf.contrib.rnn.GRUCell(config.HIDDEN_SIZE)
+        self.enc_cell = tf.contrib.rnn.MultiRNNCell([enc_cell] * config.NUM_LAYERS)
+        dec_cell = tf.contrib.rnn.GRUCell(config.HIDDEN_SIZE)
+        self.dec_cell = tf.contrib.rnn.MultiRNNCell([dec_cell] * config.NUM_LAYERS)
 
     def _create_loss(self):
         print('Creating loss...')
@@ -207,7 +209,7 @@ class ChatBotModel(object):
 
         def _seq2seq_f(encoder_inputs, decoder_inputs, do_decode):
             return embedding_attention_seq2seq(
-                encoder_inputs, decoder_inputs, self.cell, self.cell,
+                encoder_inputs, decoder_inputs, self.enc_cell, self.dec_cell,
                 num_encoder_symbols=self.vocab_size['encoder'],
                 num_decoder_symbols=self.vocab_size['decoder'],
                 embedding_size=config.HIDDEN_SIZE,
