@@ -12,6 +12,8 @@ from tensorflow.python.ops import rnn
 
 import config
 
+# TODO: fix unknown token; add dropout; decay learning rate; apply beam search.
+
 
 def embedding_attention_seq2seq(encoder_inputs,
                                 decoder_inputs,
@@ -27,6 +29,7 @@ def embedding_attention_seq2seq(encoder_inputs,
                                 scope=None,
                                 initial_state_attention=False):
     """Embedding sequence-to-sequence model with attention.
+    Re-implement of `tensorflow.contrib.legacy_seq2seq.embedding_attention_seq2seq`.
 
     This model first embeds encoder_inputs by a newly created embedding (of shape
     [num_encoder_symbols x input_size]). Then it runs an RNN to encode
@@ -79,6 +82,8 @@ def embedding_attention_seq2seq(encoder_inputs,
             enc_cell,
             embedding_classes=num_encoder_symbols,
             embedding_size=embedding_size)
+
+        # TODO: use `tensorflow.nn.bidirectional_dynamic_rnn` instead.
         encoder_outputs, encoder_state = rnn.static_rnn(
             enc_cell, encoder_inputs, dtype=dtype)
         # First calculate a concatenation of encoder outputs to put attention on.
@@ -198,6 +203,7 @@ class ChatBotModel(object):
         self.softmax_loss_function = sampled_loss
 
         enc_cell = tf.contrib.rnn.GRUCell(config.HIDDEN_SIZE)
+
         self.enc_cell = tf.contrib.rnn.MultiRNNCell([enc_cell] * config.NUM_LAYERS)
         dec_cell = tf.contrib.rnn.GRUCell(config.HIDDEN_SIZE)
         self.dec_cell = tf.contrib.rnn.MultiRNNCell([dec_cell] * config.NUM_LAYERS)

@@ -1,5 +1,6 @@
 # parameters for processing the dataset
-OUTPUT_FILE = 'output_convo.txt'
+TERMINAL_OUTPUT = 'terminal_conversation.txt'
+WECHAT_OUTPUT = 'wechat_conversation.txt'
 DATA_PATH = 'data/simisimi'
 CPT_PATH = 'checkpoints'
 

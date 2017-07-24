@@ -272,7 +272,7 @@ def chat():
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         check_restore_parameters(sess, saver)
-        output_file = open(os.path.join(config.DATA_PATH, config.OUTPUT_FILE),
+        output_file = open(os.path.join(config.DATA_PATH, config.TERMINAL_OUTPUT),
                            "a+", encoding="utf-8")
         # Decode from standard input.
         max_length = config.BUCKETS[-1][0]
