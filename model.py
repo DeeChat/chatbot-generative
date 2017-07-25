@@ -83,7 +83,6 @@ def embedding_attention_seq2seq(encoder_inputs,
             embedding_classes=num_encoder_symbols,
             embedding_size=embedding_size)
 
-        # TODO: use `tensorflow.nn.bidirectional_dynamic_rnn` instead.
         encoder_outputs, encoder_state = rnn.static_rnn(
             enc_cell, encoder_inputs, dtype=dtype)
         # First calculate a concatenation of encoder outputs to put attention on.
