@@ -14,6 +14,7 @@ from chatbot import find_right_bucket
 from chatbot import run_step
 from chatbot import construct_response
 
+
 sess = tf.InteractiveSession()
 _, enc_vocab = data_utils.load_vocab(os.path.join(config.DATA_PATH, "vocab.enc"))
 # `inv_dec_vocab` <type "list">: id2word.

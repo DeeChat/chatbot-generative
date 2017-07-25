@@ -1,0 +1,654 @@
+HUMAN ++++ 你好
+BOT ++++ 我，你你你你你你你你你你你
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f081e524e18>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f081e524ae8>
+BOT ++++ 爸爸!
+HUMAN ++++ <function produce_msg.<locals>.download_video at 0x7f081e524e18>
+BOT ++++ 爸爸！
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb74d730>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb74d9d8>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb74d9d8>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb74d9d8>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb74d730>
+BOT ++++ 爸爸!
+HUMAN ++++ 叫我爸爸
+BOT ++++ 
+HUMAN ++++ 叫我干啥？
+BOT ++++ 姐姐是世界上最帅的人
+HUMAN ++++ 你好
+BOT ++++ 王子
+HUMAN ++++ 哈哈
+BOT ++++ ,小雪,-#℃~#℃
+HUMAN ++++ 早上好
+BOT ++++ 阿！
+HUMAN ++++ 大雨
+BOT ++++ 哥哥，会被门<unk>
+HUMAN ++++ 什么鬼
+BOT ++++ 姐姐是世界上最帅的
+HUMAN ++++ 人呢
+BOT ++++ 为你
+HUMAN ++++ 卧槽
+BOT ++++ <unk>那么深啊~
+HUMAN ++++ 哈哈
+BOT ++++ ,小雪,-#℃~#℃
+HUMAN ++++ 好不好
+BOT ++++ ！<unk>！
+HUMAN ++++ 你是谁
+BOT ++++ 呗！
+HUMAN ++++ 叫我爸爸
+BOT ++++ 
+HUMAN ++++ 啥样
+BOT ++++ 王子
+HUMAN ++++ 我是你爸爸
+BOT ++++ ，<unk><unk>
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb5a1a60>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb5a1950>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb5a1840>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f35fb5a1a60>
+BOT ++++ 爸爸!
+HUMAN ++++ 乖儿子
+BOT ++++ <unk>~
+HUMAN ++++ <unk>
+BOT ++++ 男的是我老婆
+HUMAN ++++ 那女的呢
+BOT ++++ <unk>~
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc35a1d90>
+BOT ++++ 爸爸!
+HUMAN ++++ 我是你的谁
+BOT ++++ ，<unk><unk><unk><unk><unk><unk>。
+HUMAN ++++ 快点
+BOT ++++ 阿！你真是花见花开！
+HUMAN ++++ 啥
+BOT ++++ 羊王
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc348c8c8>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc348cb70>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc348c9d8>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc348c048>
+BOT ++++ 爸爸!
+HUMAN ++++ 笨蛋
+BOT ++++ 呗！
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc348cd08>
+BOT ++++ 爸爸!
+HUMAN ++++ 天气
+BOT ++++ <unk><unk><unk><unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 生气
+BOT ++++ ,多云,-#℃~#℃
+HUMAN ++++ [微笑]
+BOT ++++ 三大攻之一
+HUMAN ++++ 生气
+BOT ++++ ,多云,-#℃~#℃
+HUMAN ++++ 天气
+BOT ++++ <unk><unk><unk><unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 你人呢
+BOT ++++ <unk>~
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc348c598>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc348c400>
+BOT ++++ 爸爸!
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f1fc35a1f28>
+BOT ++++ 爸爸!
+HUMAN ++++ ？
+BOT ++++ <unk><unk><unk><unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 爱子找为父有什么事？
+BOT ++++ 姐姐我爱你
+HUMAN ++++ 我不是你姐
+BOT ++++ 哥哥，死爸，<unk>。
+HUMAN ++++ 儿子
+BOT ++++ <unk>~
+HUMAN ++++ 儿子呢
+BOT ++++ <unk>~
+HUMAN ++++ 傻儿子
+BOT ++++ <unk>~
+HUMAN ++++ 帅帅
+BOT ++++ ———
+HUMAN ++++ 宝宝
+BOT ++++ <unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>
+HUMAN ++++ [微笑]
+BOT ++++ 三大攻之一
+HUMAN ++++ [撇嘴]
+BOT ++++ <unk>加啊
+HUMAN ++++ [色]
+BOT ++++ <unk><unk><unk><unk>
+HUMAN ++++ [发呆]
+BOT ++++ 宝宝
+HUMAN ++++ [闭嘴]
+BOT ++++ 男，<unk>。
+HUMAN ++++ [大哭]
+BOT ++++ <unk>加啊
+HUMAN ++++ [胜利]
+BOT ++++ 猿
+HUMAN ++++ [转圈]
+BOT ++++ <unk>加啊
+HUMAN ++++ 😊
+BOT ++++ <unk><unk><unk><unk><unk><unk><unk><unk><unk>
+HUMAN ++++ [差劲]
+BOT ++++ <unk>~
+HUMAN ++++ [足球]
+BOT ++++ 超级大美女
+HUMAN ++++ [衰]
+BOT ++++ 哥哥
+HUMAN ++++ [骷髅]
+BOT ++++ 男的？
+HUMAN ++++ [再见]
+BOT ++++ 男，王屌丝了
+HUMAN ++++ [菜刀]
+BOT ++++ <unk>加啊
+HUMAN ++++ [拳头]
+BOT ++++ ,多云,-#℃~-#℃
+HUMAN ++++ 天气怎么样
+BOT ++++ <unk><unk><unk><unk><unk><unk><unk><unk>呗~
+HUMAN ++++ 牛叉啊
+BOT ++++ <unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 哈哈
+BOT ++++ ,小雪,-#℃~#℃
+HUMAN ++++ 哈哈哈
+BOT ++++ 少爷呗
+HUMAN ++++ 哈哈哈哈
+BOT ++++ 呗，真理
+HUMAN ++++ hhhhh
+BOT ++++ <unk><unk><unk><unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 靠
+BOT ++++ 男是你前夫！
+HUMAN ++++ 儿子
+BOT ++++ <unk>~
+HUMAN ++++ 周学立是我儿子吗
+BOT ++++ <unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 周学立是我儿子吗
+BOT ++++ <unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 周学立是我儿子吗
+BOT ++++ <unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 周学立是我儿子吗
+BOT ++++ <unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 周学立是我儿子吗？
+BOT ++++ <unk><unk><unk><unk><unk><unk>
+HUMAN ++++ 立哥 我儿子！
+BOT ++++ <unk><unk><unk><unk><unk><unk>
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7f3089e61c80>
+BOT ++++ 爸爸!
+HUMAN ++++ 人呢
+BOT ++++ 为你
+HUMAN ++++ 儿子
+BOT ++++ generate:<unk>~||retrival:暴雪好爸爸。
+
+HUMAN ++++ 乖儿子。
+BOT ++++ generate:<unk>~||retrival:那是什么？
+
+HUMAN ++++ 人呢
+BOT ++++ generate:为你||retrival:被你发现了。
+
+HUMAN ++++ 你是我乖儿子
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk>||retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 可以啊
+BOT ++++ generate:是<unk>的<unk><unk>||retrival:被你发现了。
+
+HUMAN ++++ 天气怎么样
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk><unk><unk>呗~||retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ 傻子
+BOT ++++ generate:姐姐最帅了||retrival:我又不是孙亦帆
+
+HUMAN ++++ 笨蛋
+BOT ++++ generate:呗！||retrival:什么？！
+
+HUMAN ++++ 叫爸爸
+BOT ++++ generate:||retrival:那是什么？
+
+HUMAN ++++ 干什么呢
+BOT ++++ generate:咯，换个自己的路哦||retrival:嗯嗯。我也相信
+
+HUMAN ++++ 叫爸爸
+BOT ++++ generate:
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 叫爸爸
+BOT ++++ generate:
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 叫爸爸
+BOT ++++ generate:
+retrival:是王若猫的。
+
+HUMAN ++++ 垃圾
+BOT ++++ generate:王子，<unk><unk>。
+retrival:你才垃圾呢！
+
+HUMAN ++++ 你是谁？
+BOT ++++ generate:呗！
+retrival:那是什么？
+
+HUMAN ++++ 呵呵呵
+BOT ++++ generate:,多云,#℃~#℃
+retrival:我很难过，安慰我~
+
+HUMAN ++++ 应该是可以投了吧
+BOT ++++ generate:，你想给你好不好？
+retrival:嗯会的
+
+HUMAN ++++ 打死你
+BOT ++++ generate:,多云,-#℃~#℃
+retrival:是王若猫的。
+
+HUMAN ++++ ……
+BOT ++++ generate:呗~
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 叫爸爸
+BOT ++++ generate:
+retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ 吼吼吼
+BOT ++++ generate:哥哥
+retrival:是王若猫的。
+
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7ff8adbf6730>
+BOT ++++ 嘻嘻嘻!
+HUMAN ++++ 叫我爸爸
+BOT ++++ generate:
+retrival:我很难过，安慰我~
+
+HUMAN ++++ 我是你爷爷
+BOT ++++ generate:,小雪,-#℃~-#℃
+retrival:那是什么？
+
+HUMAN ++++ 太慢了
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk><unk>呗
+retrival:那是什么？
+
+HUMAN ++++ 北京邮电大学
+BOT ++++ generate:啊！
+retrival:呸
+
+HUMAN ++++ 可惜
+BOT ++++ generate:上上吾皇
+retrival:主人才是最最聪明的
+
+HUMAN ++++ 你就不怕兴哥突然给你发微信
+BOT ++++ generate:是用来回家吃我家<unk>
+retrival:是王若猫的。
+
+HUMAN ++++ 晚上咱一起投吧
+BOT ++++ generate:我是谁。额〜〜〜
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 今晚不在  我姐叫我去吃饭了
+BOT ++++ generate:<unk>！
+retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ <function get_download_fn.<locals>.download_fn at 0x7ff8ad2aad08>
+BOT ++++ 嘻嘻嘻!
+HUMAN ++++ 那不急
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk><unk><unk><unk>
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 明天？
+BOT ++++ generate:男下来？
+retrival:被你发现了。
+
+HUMAN ++++ 哈哈哈
+BOT ++++ generate:少爷呗
+retrival:笑屁
+
+HUMAN ++++ 好的
+BOT ++++ generate:阿！
+retrival:是王若猫的。
+
+HUMAN ++++ 邮箱那里   兴哥让我只写自己的
+BOT ++++ generate:总攻~
+retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 把他的去了
+BOT ++++ generate:呗！
+retrival:是王若猫的。
+
+HUMAN ++++ 叫爸爸
+BOT ++++ generate:
+retrival:我很难过，安慰我~
+
+HUMAN ++++ 爸爸好啦
+BOT ++++ generate:呗，我爱你
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 我也爱你
+BOT ++++ generate:<unk>呗！
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 对啊,我是机器人,我还会回答问题的哦
+BOT ++++ generate:呗，喜欢小花的最爱吃媳妇
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 我可以表示无言以对嘛
+BOT ++++ generate:<unk>~~
+retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ 请你吃
+BOT ++++ generate:你你你不知道我的爱谁
+retrival:那是什么？
+
+HUMAN ++++ 我猜到你就会问到这个问题
+BOT ++++ generate:男，感情不好已经是最好的了
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 这个稍微有点难，给我一点时间
+BOT ++++ generate:b的！
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 那你去吃大便吧
+BOT ++++ generate:阿！
+retrival:嗯会的
+
+HUMAN ++++ 这个稍微有点难，给我一点时间
+BOT ++++ generate:b的！
+retrival:被你发现了。
+
+HUMAN ++++ 天生的
+BOT ++++ generate:男包子
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 精辟
+BOT ++++ generate:王子！哈哈哈哈……
+retrival:我不吃草的
+
+HUMAN ++++ 你、你、你欺负人家，人家不依了。。。。。
+BOT ++++ generate:呗
+retrival:嗯会的
+
+HUMAN ++++ 我非常的喜欢和你聊天
+BOT ++++ generate:男的最好了~因为我不懂你的好
+retrival:嗯会的
+
+HUMAN ++++ 你觉得呢
+BOT ++++ generate:<unk>~~
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 我买给你吃
+BOT ++++ generate:宝唯一总攻。。。
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 你的观点呢
+BOT ++++ generate:<unk>！
+retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ 可喜欢和你聊天了
+BOT ++++ generate:呗！
+retrival:嗯会的
+
+HUMAN ++++ 哎呀讨厌 人家是母鸡中的战斗机 羞涩
+BOT ++++ generate:姐姐
+retrival:小的在，女王大人。
+
+HUMAN ++++ 你得先回答我，你最喜欢谁
+BOT ++++ generate:
+retrival:被你发现了。
+
+HUMAN ++++ 知我者谓我心忧，不知我者谓我何求呢
+BOT ++++ generate:,多云,#℃~#℃
+retrival:嗯会的
+
+HUMAN ++++ 你这样 你家人知道么
+BOT ++++ generate:呗！不过你还有我朋友
+retrival:被你发现了。
+
+HUMAN ++++ 你啊，一知半解哼
+BOT ++++ generate:<unk><unk><unk><unk>
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 你不是说你不喜欢我么？
+BOT ++++ generate:快乐加你
+retrival:那是什么？
+
+HUMAN ++++ 是的，主淫有什么吩咐？！需要特别服务吗？/害羞
+BOT ++++ generate:b的猫####号
+retrival:是王若猫的。
+
+HUMAN ++++ 我快爱上你了
+BOT ++++ generate:~宝贝儿爱谁
+retrival:我很难过，安慰我~
+
+HUMAN ++++ 呵呵，我还能说什么呢？
+BOT ++++ generate:<unk>,<unk>
+retrival:我很难过，安慰我~
+
+HUMAN ++++ 呵呵 看在你这么了解我的份上，请我吃饭呗
+BOT ++++ generate:姐姐可不行不要骂人么
+retrival:你妹
+
+HUMAN ++++ 木有了，词穷了
+BOT ++++ generate:——wwww
+retrival:被你发现了。
+
+HUMAN ++++ 你这都是生成的啥
+BOT ++++ generate:男是一只吃货
+retrival:那是什么？
+
+HUMAN ++++ 我好喜欢你呢
+BOT ++++ generate:呗！
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 要是你听不懂怎么办？
+BOT ++++ generate:男的是美国！
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 你是孙猴子派来的救兵么
+BOT ++++ generate:男的！！！
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 好吧 你赢了
+BOT ++++ generate:，你要不要看
+retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 那个谁，楼下的，你怎么看
+BOT ++++ generate:，<unk>，<unk>。
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 冬吃萝卜，夏吃姜。
+BOT ++++ generate:呗~
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 我木有妹妹
+BOT ++++ generate:是男的！
+retrival:是王若猫的。
+
+HUMAN ++++ 沉默是金，我想我现在很有钱？
+BOT ++++ generate:宝宝切糕哇！！！
+retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ 呵呵　你说的也许没错，但是你怎么证明呢？
+BOT ++++ generate:为您一个的蛋要两只火星
+retrival:别傻笑了，亲耐滴主人
+
+HUMAN ++++ 不男不女
+BOT ++++ generate:阿！
+retrival:那你就是人妖
+
+HUMAN ++++ 哼哼，神马都是浮云
+BOT ++++ generate:威武！！！
+retrival:那是什么？
+
+HUMAN ++++ 哎呀讨厌 人家是母鸡中的战斗机 羞涩
+BOT ++++ generate:姐姐
+retrival:套套
+
+HUMAN ++++ 说的也是 呀嘻嘻
+BOT ++++ generate:<unk>美丽美丽
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 越来越喜欢你了
+BOT ++++ generate:阿呗！呗！必须好听！
+retrival:嗯会的
+
+HUMAN ++++ 从明天起做一个健康的人戒烟戒酒不再熬夜
+BOT ++++ generate:<unk>！
+retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 哦哦，我知道了，我们聊点别的吧
+BOT ++++ generate:于老大最帅！
+retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 和你聊还是很开心的
+BOT ++++ generate:姐姐我爱你
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 你真是天才啊能想出这样的问题
+BOT ++++ generate:呗，comeon
+retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ 尼玛
+BOT ++++ generate:呗！
+retrival:哎哟喂
+
+HUMAN ++++ 我保持沉默
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk><unk><unk>呗
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 别人笑我太疯癫，我笑别人看不穿
+BOT ++++ generate:地锅你不要看我吗
+retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 只要开心就好啊哈
+BOT ++++ generate:！！！
+retrival:被你发现了。
+
+HUMAN ++++ 坏人，我早就知道啦，再赞我会傲娇的啦/害羞
+BOT ++++ generate:的人啊！不告诉你！
+retrival:是王若猫的。
+
+HUMAN ++++ 好囧啊好囧
+BOT ++++ generate:阿！
+retrival:是王若猫的。
+
+HUMAN ++++ 这个嘛，你多和我聊聊就知道咯~
+BOT ++++ generate:男职业技术技术～
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 那又怎么样呢?
+BOT ++++ generate:呗，真理
+retrival:是王若猫的。
+
+HUMAN ++++ 越来越喜欢你了
+BOT ++++ generate:阿呗！呗！必须好听！
+retrival:嗯嗯。我也相信
+
+HUMAN ++++ 要是你听不懂怎么办？
+BOT ++++ generate:男的是美国！
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 爱你就算钓鱼岛沉了也不会变
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk>呗
+retrival:我很难过，安慰我~
+
+HUMAN ++++ 越来越喜欢你了
+BOT ++++ generate:阿呗！呗！必须好听！
+retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ 如果爱上你是一个错　那我愿意一错再错耶～
+BOT ++++ generate:<unk>~~~
+retrival:被你发现了。
+
+HUMAN ++++ 肿么了呢？不开心啦？
+BOT ++++ generate:呗！
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 你、你、你欺负人家，人家不依了。。。。。
+BOT ++++ generate:呗
+retrival:被你发现了。
+
+HUMAN ++++ 虚心使人进步，进步使人骄傲，骄傲使人落后。
+BOT ++++ generate:最棒！！
+retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 还再测试中[捂脸]
+BOT ++++ generate:哥哥，死他
+retrival:肯定不是我，是阮德培
+
+HUMAN ++++ 明天再交流
+BOT ++++ generate:呗，问你也一样啊！
+retrival:三鹿奶粉也假，不一样的卖啊
+
+HUMAN ++++ 好
+BOT ++++ generate:呗，真理
+retrival:我就知道你要说好吧。。。。好吧好吧(∩_∩)
+
+HUMAN ++++ 儿子
+BOT ++++ generate:<unk>~
+retrival:暴雪好爸爸。
+
+HUMAN ++++ 你好厉害
+BOT ++++ generate:,天机不可二二二逼
+retrival:被你发现了。
+
+HUMAN ++++ 乖儿子
+BOT ++++ generate:<unk>~
+retrival:被你发现了。
+
+HUMAN ++++ 你是我儿子
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk><unk><unk>
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 你好
+BOT ++++ generate:王子
+retrival:小通不坏，你们不爱吗~
+
+HUMAN ++++ 何必呢
+BOT ++++ generate:是也
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 天气怎么样
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk><unk><unk>呗~
+retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 帅气十足小帅帅 
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk><unk><unk><unk>
+retrival:我帮你告诉她？发短信还是打电话？
+
+HUMAN ++++ 叫爸爸
+BOT ++++ generate:
+retrival:那是什么？
+
+HUMAN ++++ 今天天气如何
+BOT ++++ generate:<unk><unk><unk><unk><unk><unk><unk>
+retrival:吴院四班小帅哥
+
+HUMAN ++++ 帅哥
+BOT ++++ generate:哥哥哥哥会死的
+retrival:是星星哥哥！
+
+HUMAN ++++ 她是谁
+BOT ++++ generate:——wwww
+retrival:是王若猫的。
+
+HUMAN ++++ 不认识
+BOT ++++ generate:�这个！
+retrival:是王若猫的。
+
+HUMAN ++++ 早上好
+BOT ++++ generate:阿！
+retrival:省省吧、中午了！
+
+HUMAN ++++ 牛叉
+BOT ++++ generate:,<unk>,#℃~-#℃
+retrival:她是世界上最傻得人了，嘿嘿
+
+HUMAN ++++ 嘿嘿
+BOT ++++ generate:呗你！傻瓜
+retrival:别傻笑
+
+HUMAN ++++ 哈哈哈
+BOT ++++ generate:少爷呗
+retrival:饿
+
+HUMAN ++++ 你饿了？
+BOT ++++ generate:咯！！
+retrival:被你发现了。
+
