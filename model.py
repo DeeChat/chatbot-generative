@@ -77,6 +77,7 @@ def embedding_attention_seq2seq(encoder_inputs,
     with tf.variable_scope(scope or "embedding_attention_seq2seq",
                            dtype=dtype) as scope:
         dtype = scope.dtype
+        # TODO: use `tensorflow.nn.embedding_lookup` instead.
         # Encoder.
         enc_cell = core_rnn_cell.EmbeddingWrapper(
             enc_cell,
@@ -147,6 +148,28 @@ def embedding_attention_seq2seq(encoder_inputs,
         return outputs_and_state[:outputs_len], state
 
 
+def create_rnn_cell():
+    """
+
+    """
+    # TODO
+    pass
+
+
+def _build_bidirectional_rnn():
+    """Create and call biddirectional RNN cells.
+    Returns:
+        outputs, states
+    """
+    # static_bidirectional_rnn
+    # TODO
+    # bi_outputs, bi_state = tf.nn.bidirectional_dynamic_rnn(
+    #     fw_cell, bw_cell, inputs,
+    #     dtype=dtype,
+    #     time_major=self.time_major)
+    pass
+
+
 class ChatBotModel(object):
     def __init__(self, forward_only, batch_size):
         """
@@ -158,6 +181,28 @@ class ChatBotModel(object):
         with open(os.path.join(config.DATA_PATH, "vocab_size.json"), "r") as f:
             self.vocab_size = json.load(f)
 
+    # def _create_placeholders(self):
+    #     # Feeds for inputs. It's a list of placeholders
+    #     print("Creating placeholders...")
+    #     # shape: (batch_size, max_length)
+    #     self.encoder_inputs = tf.placeholder(
+    #         shape=(None, None),
+    #         dtype=tf.int32,
+    #         name="encoder_inputs",
+    #     )
+    #     self.decoder_inputs = tf.placeholder(
+    #         shape=(None, None),
+    #         dtype=tf.int32,
+    #         name="decoder_inputs"
+    #     )
+    #     self.decoder_masks = tf.placeholder(
+    #         shape=(None, None),
+    #         dtype=tf.float32,
+    #         name="mask"
+    #     )
+    #
+    #     # Our targets are decoder inputs shifted by one (to ignore <s> symbol)
+    #     self.targets = self.decoder_inputs[:, 1:]
     def _create_placeholders(self):
         # Feeds for inputs. It's a list of placeholders
         print("Creating placeholders...")
@@ -202,10 +247,9 @@ class ChatBotModel(object):
 
         self.softmax_loss_function = sampled_loss
 
-        enc_cell = tf.contrib.rnn.GRUCell(config.HIDDEN_SIZE)
-
+        enc_cell = tf.contrib.rnn.BasicLSTMCell(config.HIDDEN_SIZE)
         self.enc_cell = tf.contrib.rnn.MultiRNNCell([enc_cell] * config.NUM_LAYERS)
-        dec_cell = tf.contrib.rnn.GRUCell(config.HIDDEN_SIZE)
+        dec_cell = tf.contrib.rnn.BasicLSTMCell(config.HIDDEN_SIZE)
         self.dec_cell = tf.contrib.rnn.MultiRNNCell([dec_cell] * config.NUM_LAYERS)
 
     def _create_loss(self):

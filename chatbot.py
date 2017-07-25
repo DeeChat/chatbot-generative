@@ -51,6 +51,50 @@ def _assert_lengths(encoder_size, decoder_size, encoder_inputs,
                          " {:d} != {:d}.".format(len(decoder_masks), decoder_size))
 
 
+# def run_step(sess, model, encoder_inputs, decoder_inputs,
+#              decoder_masks, bucket_id, forward_only):
+#     """
+#     Run one step in training.
+#     Args:
+#         sess: tensorflow.Session
+#         model: ChatBotModel
+#         encoder_inputs: batch_encoder_inputs
+#         decoder_inputs: batch_decoder_inputs
+#         decoder_masks: weights
+#         bucket_id: index of the chosen bucket.
+#         forward_only: boolean value to decide whether a backward path should be created
+#             forward_only is set to True when you just want to evaluate on the test set,
+#             or when you want to the bot to be in chat mode.
+#     Returns:
+#         gradient norm, loss, outputs.
+#     """
+#     encoder_size, decoder_size = config.BUCKETS[bucket_id]
+#     _assert_lengths(encoder_size, decoder_size,
+#                     encoder_inputs, decoder_inputs, decoder_masks)
+#
+#     # input feed: encoder inputs, decoder inputs, target_weights, as provided.
+#     input_feed = {model.encoder_inputs.name: encoder_inputs,
+#                   model.decoder_inputs.name: decoder_inputs,
+#                   model.decoder_masks.name: decoder_masks}
+#
+#     last_target = model.decoder_inputs[decoder_size].name
+#     input_feed[last_target] = np.zeros([model.batch_size], dtype=np.int32)
+#
+#     # output feed: depends on whether we do a backward step or not.
+#     if not forward_only:
+#         output_feed = [model.train_ops[bucket_id],  # update op that does SGD.
+#                        model.gradient_norms[bucket_id],  # gradient norm.
+#                        model.losses[bucket_id]]  # loss for this batch.
+#     else:
+#         output_feed = [model.losses[bucket_id]]  # loss for this batch.
+#         for step in range(decoder_size):  # output logits.
+#             output_feed.append(model.outputs[bucket_id][step])
+#
+#     outputs = sess.run(output_feed, input_feed)
+#     if not forward_only:
+#         return outputs[1], outputs[2], None  # Gradient norm, loss, no outputs.
+#     else:
+#         return None, outputs[0], outputs[1:]  # No gradient norm, loss, outputs.
 def run_step(sess, model, encoder_inputs, decoder_inputs,
              decoder_masks, bucket_id, forward_only):
     """

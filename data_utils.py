@@ -209,6 +209,55 @@ def _reshape_batch(inputs, size, batch_size):
     return batch_inputs
 
 
+# def get_batch(data_bucket, bucket_id, batch_size=1):
+#     """
+#     Get one batch to feed into the model.
+#     Args:
+#         data_bucket: a certain bucket from `data_buckets`,
+#             which is a list of <context, response> pairs.
+#         bucket_id: a bucket index which is randomly chosen.
+#         batch_size: batch size <type "int">.
+#     """
+#     # Only pad to the max length of the bucket
+#     encoder_size, decoder_size = config.BUCKETS[bucket_id]
+#     encoder_inputs, decoder_inputs = [], []
+#
+#     for _ in range(batch_size):
+#         # Choose a <context, utterance> pair randomly from the current bucket.
+#         encoder_input, decoder_input = random.choice(data_bucket)
+#         # Pad both encoder and decoder, reverse the encoder.
+#         encoder_inputs.append(list(reversed(_pad_input(encoder_input, encoder_size))))
+#         decoder_inputs.append(_pad_input(decoder_input, decoder_size))
+#     # encoder_inputs <type "list">: a batch of input data of encoder.
+#     # encoder_inputs[0]: first padded encoder input of this batch,
+#     #     e.g.: [0, 0, 41, 147, 30, 5]
+#     # encoder_inputs[0][0]: first word index of the first encoder.
+#     # Now we create batch-major vectors from the data selected above.
+#     # batch_encoder_inputs = _reshape_batch(encoder_inputs, encoder_size, batch_size)
+#     # # batch_encoder_inputs: a list of array.
+#     # # batch_encoder_inputs[0]: a 1-d array with shape (batch_size,). It
+#     # #     is the last time step of all encoder inputs within this batch.
+#     # # batch_decoder_inputs = _reshape_batch(decoder_inputs, decoder_size, batch_size)
+#     batch_encoder_inputs = [np.array(enc_batch, dtype=np.int32) for enc_batch in encoder_inputs]
+#     batch_decoder_inputs = [np.array(dec_batch, dtype=np.int32) for dec_batch in decoder_inputs]
+#     # Create decoder_masks to be 0 for decoders that are padding.
+#     batch_masks = []
+#     # For each time step while decoding.
+#     for idx in range(batch_size):
+#         batch_mask = np.ones(decoder_size, dtype=np.float32)
+#         # For each example in this batch.
+#         for dec_time_step in range(decoder_size):
+#             # we set mask to 0 if the corresponding target is <PAD> or <\s>.
+#             # the corresponding decoder is decoder_input shifted by 1 forward.
+#             if dec_time_step < decoder_size - 1:
+#                 target = decoder_inputs[idx][dec_time_step + 1]
+#             # noinspection PyUnboundLocalVariable
+#             if dec_time_step == decoder_size - 1 or target == config.PAD_ID:
+#                 batch_mask[dec_time_step] = 0.0
+#         batch_masks.append(batch_mask)
+#     return batch_encoder_inputs, batch_decoder_inputs, batch_masks
+
+
 def get_batch(data_bucket, bucket_id, batch_size=1):
     """
     Get one batch to feed into the model.
